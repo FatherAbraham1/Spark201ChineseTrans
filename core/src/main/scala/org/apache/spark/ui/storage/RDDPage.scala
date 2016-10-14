@@ -50,7 +50,7 @@ private[ui] class RDDPage(parent: StorageTab) extends WebUIPage("rdd") {
     val rddStorageInfo = AllRDDResource.getRDDStorageInfo(rddId, listener, includeDetails = true)
       .getOrElse {
         // Rather than crashing, render an "RDD Not Found" page
-        return UIUtils.headerSparkPage("RDD Not Found", Seq[Node](), parent)
+        return UIUtils.headerSparkPage("未找到RDD", Seq[Node](), parent)
       }
 
     // Worker table
@@ -141,14 +141,14 @@ private[ui] class RDDPage(parent: StorageTab) extends WebUIPage("rdd") {
         {blockTableHTML ++ jsForScrollingDownToBlockTable}
       </div>;
 
-    UIUtils.headerSparkPage("RDD Storage Info for " + rddStorageInfo.name, content, parent)
+    UIUtils.headerSparkPage("RDD存储信息 " + rddStorageInfo.name, content, parent)
   }
 
   /** Header fields for the worker table */
   private def workerHeader = Seq(
-    "Host",
-    "Memory Usage",
-    "Disk Usage")
+    "节点",
+    "内存使用",
+    "磁盘使用")
 
   /** Render an HTML row representing a worker */
   private def workerRow(worker: RDDDataDistribution): Seq[Node] = {
@@ -198,23 +198,23 @@ private[ui] class BlockDataSource(
    */
   private def ordering(sortColumn: String, desc: Boolean): Ordering[BlockTableRowData] = {
     val ordering = sortColumn match {
-      case "Block Name" => new Ordering[BlockTableRowData] {
+      case "Block 名称" => new Ordering[BlockTableRowData] {
         override def compare(x: BlockTableRowData, y: BlockTableRowData): Int =
           Ordering.String.compare(x.blockName, y.blockName)
       }
-      case "Storage Level" => new Ordering[BlockTableRowData] {
+      case "存储级别" => new Ordering[BlockTableRowData] {
         override def compare(x: BlockTableRowData, y: BlockTableRowData): Int =
           Ordering.String.compare(x.storageLevel, y.storageLevel)
       }
-      case "Size in Memory" => new Ordering[BlockTableRowData] {
+      case "所占内存" => new Ordering[BlockTableRowData] {
         override def compare(x: BlockTableRowData, y: BlockTableRowData): Int =
           Ordering.Long.compare(x.memoryUsed, y.memoryUsed)
       }
-      case "Size on Disk" => new Ordering[BlockTableRowData] {
+      case "所占磁盘" => new Ordering[BlockTableRowData] {
         override def compare(x: BlockTableRowData, y: BlockTableRowData): Int =
           Ordering.Long.compare(x.diskUsed, y.diskUsed)
       }
-      case "Executors" => new Ordering[BlockTableRowData] {
+      case "执行器" => new Ordering[BlockTableRowData] {
         override def compare(x: BlockTableRowData, y: BlockTableRowData): Int =
           Ordering.String.compare(x.executors, y.executors)
       }
@@ -268,11 +268,11 @@ private[ui] class BlockPagedTable(
 
   override def headers: Seq[Node] = {
     val blockHeaders = Seq(
-      "Block Name",
-      "Storage Level",
-      "Size in Memory",
-      "Size on Disk",
-      "Executors")
+      "Block 名称",
+      "存储级别",
+      "所占内存",
+      "所占磁盘",
+      "执行器")
 
     if (!blockHeaders.contains(sortColumn)) {
       throw new IllegalArgumentException(s"Unknown column: $sortColumn")

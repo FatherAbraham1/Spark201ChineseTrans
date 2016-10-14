@@ -76,7 +76,7 @@ private[ui] class AllStagesPage(parent: StagesTab) extends WebUIPage("") {
             {
               if (shouldShowActiveStages) {
                 <li>
-                  <a href="#active"><strong>Active Stages:</strong></a>
+                  <a href="#active"><strong>活跃阶段:</strong></a>
                   {activeStages.size}
                 </li>
               }
@@ -84,7 +84,7 @@ private[ui] class AllStagesPage(parent: StagesTab) extends WebUIPage("") {
             {
               if (shouldShowPendingStages) {
                 <li>
-                  <a href="#pending"><strong>Pending Stages:</strong></a>
+                  <a href="#pending"><strong>等待阶段:</strong></a>
                   {pendingStages.size}
                 </li>
               }
@@ -92,7 +92,7 @@ private[ui] class AllStagesPage(parent: StagesTab) extends WebUIPage("") {
             {
               if (shouldShowCompletedStages) {
                 <li id="completed-summary">
-                  <a href="#completed"><strong>Completed Stages:</strong></a>
+                  <a href="#completed"><strong>已完成阶段:</strong></a>
                   {completedStageNumStr}
                 </li>
               }
@@ -100,7 +100,7 @@ private[ui] class AllStagesPage(parent: StagesTab) extends WebUIPage("") {
             {
               if (shouldShowFailedStages) {
                 <li>
-                  <a href="#failed"><strong>Failed Stages:</strong></a>
+                  <a href="#failed"><strong>已失败阶段:</strong></a>
                   {numFailedStages}
                 </li>
               }
@@ -117,22 +117,22 @@ private[ui] class AllStagesPage(parent: StagesTab) extends WebUIPage("") {
           }
         }
       if (shouldShowActiveStages) {
-        content ++= <h4 id="active">Active Stages ({activeStages.size})</h4> ++
+        content ++= <h4 id="active">活跃阶段 ({activeStages.size})</h4> ++
         activeStagesTable.toNodeSeq
       }
       if (shouldShowPendingStages) {
-        content ++= <h4 id="pending">Pending Stages ({pendingStages.size})</h4> ++
+        content ++= <h4 id="pending">等待阶段 ({pendingStages.size})</h4> ++
         pendingStagesTable.toNodeSeq
       }
       if (shouldShowCompletedStages) {
-        content ++= <h4 id="completed">Completed Stages ({completedStageNumStr})</h4> ++
+        content ++= <h4 id="completed">已完成阶段 ({completedStageNumStr})</h4> ++
         completedStagesTable.toNodeSeq
       }
       if (shouldShowFailedStages) {
-        content ++= <h4 id ="failed">Failed Stages ({numFailedStages})</h4> ++
+        content ++= <h4 id ="failed">已失败阶段 ({numFailedStages})</h4> ++
         failedStagesTable.toNodeSeq
       }
-      UIUtils.headerSparkPage("Stages for All Jobs", content, parent)
+      UIUtils.headerSparkPage("全部阶段", content, parent)
     }
   }
 }

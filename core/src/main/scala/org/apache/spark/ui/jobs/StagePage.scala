@@ -111,11 +111,11 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
       val stageAttemptId = parameterAttempt.toInt
       val stageDataOption = progressListener.stageIdToData.get((stageId, stageAttemptId))
 
-      val stageHeader = s"Details for Stage $stageId (Attempt $stageAttemptId)"
+      val stageHeader = s"阶段信息 $stageId (尝试 $stageAttemptId)"
       if (stageDataOption.isEmpty) {
         val content =
           <div id="no-info">
-            <p>No information to display for Stage {stageId} (Attempt {stageAttemptId})</p>
+            <p>该阶段没有展示信息 {stageId} (尝试 {stageAttemptId})</p>
           </div>
         return UIUtils.headerSparkPage(stageHeader, content, parent)
 
@@ -123,8 +123,8 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
       if (stageDataOption.get.taskData.isEmpty) {
         val content =
           <div>
-            <h4>Summary Metrics</h4> No tasks have started yet
-            <h4>Tasks</h4> No tasks have started yet
+            <h4>监控摘要</h4> 没有开始的任务
+            <h4>任务</h4> 没有开始的任务
           </div>
         return UIUtils.headerSparkPage(stageHeader, content, parent)
       }
@@ -148,46 +148,46 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
         <div>
           <ul class="unstyled">
             <li>
-              <strong>Total Time Across All Tasks: </strong>
+              <strong>全部任务运行时长: </strong>
               {UIUtils.formatDuration(stageData.executorRunTime)}
             </li>
             <li>
-              <strong>Locality Level Summary: </strong>
+              <strong>本地级别摘要: </strong>
               {getLocalitySummaryString(stageData)}
             </li>
             {if (stageData.hasInput) {
               <li>
-                <strong>Input Size / Records: </strong>
+                <strong>输入大小/ 记录: </strong>
                 {s"${Utils.bytesToString(stageData.inputBytes)} / ${stageData.inputRecords}"}
               </li>
             }}
             {if (stageData.hasOutput) {
               <li>
-                <strong>Output: </strong>
+                <strong>输出: </strong>
                 {s"${Utils.bytesToString(stageData.outputBytes)} / ${stageData.outputRecords}"}
               </li>
             }}
             {if (stageData.hasShuffleRead) {
               <li>
-                <strong>Shuffle Read: </strong>
+                <strong>Shuffle 读: </strong>
                 {s"${Utils.bytesToString(stageData.shuffleReadTotalBytes)} / " +
                  s"${stageData.shuffleReadRecords}"}
               </li>
             }}
             {if (stageData.hasShuffleWrite) {
               <li>
-                <strong>Shuffle Write: </strong>
+                <strong>Shuffle 写: </strong>
                  {s"${Utils.bytesToString(stageData.shuffleWriteBytes)} / " +
                  s"${stageData.shuffleWriteRecords}"}
               </li>
             }}
             {if (stageData.hasBytesSpilled) {
               <li>
-                <strong>Shuffle Spill (Memory): </strong>
+                <strong>Shuffle 溢出 (内存): </strong>
                 {Utils.bytesToString(stageData.memoryBytesSpilled)}
               </li>
               <li>
-                <strong>Shuffle Spill (Disk): </strong>
+                <strong>Shuffle 溢出 (磁盘): </strong>
                 {Utils.bytesToString(stageData.diskBytesSpilled)}
               </li>
             }}
@@ -198,26 +198,26 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
         <div>
           <span class="expand-additional-metrics">
             <span class="expand-additional-metrics-arrow arrow-closed"></span>
-            <a>Show Additional Metrics</a>
+            <a>显示附加监控</a>
           </span>
           <div class="additional-metrics collapsed">
             <ul>
               <li>
                   <input type="checkbox" id="select-all-metrics"/>
-                  <span class="additional-metric-title"><em>(De)select All</em></span>
+                  <span class="additional-metric-title"><em>全选</em></span>
               </li>
               <li>
                 <span data-toggle="tooltip"
                       title={ToolTips.SCHEDULER_DELAY} data-placement="right">
                   <input type="checkbox" name={TaskDetailsClassNames.SCHEDULER_DELAY}/>
-                  <span class="additional-metric-title">Scheduler Delay</span>
+                  <span class="additional-metric-title">调度延迟</span>
                 </span>
               </li>
               <li>
                 <span data-toggle="tooltip"
                       title={ToolTips.TASK_DESERIALIZATION_TIME} data-placement="right">
                   <input type="checkbox" name={TaskDetailsClassNames.TASK_DESERIALIZATION_TIME}/>
-                  <span class="additional-metric-title">Task Deserialization Time</span>
+                  <span class="additional-metric-title">任务反序列化时长</span>
                 </span>
               </li>
               {if (stageData.hasShuffleRead) {
@@ -225,14 +225,14 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
                   <span data-toggle="tooltip"
                         title={ToolTips.SHUFFLE_READ_BLOCKED_TIME} data-placement="right">
                     <input type="checkbox" name={TaskDetailsClassNames.SHUFFLE_READ_BLOCKED_TIME}/>
-                    <span class="additional-metric-title">Shuffle Read Blocked Time</span>
+                    <span class="additional-metric-title">Shuffle读阻塞时长</span>
                   </span>
                 </li>
                 <li>
                   <span data-toggle="tooltip"
                         title={ToolTips.SHUFFLE_READ_REMOTE_SIZE} data-placement="right">
                     <input type="checkbox" name={TaskDetailsClassNames.SHUFFLE_READ_REMOTE_SIZE}/>
-                    <span class="additional-metric-title">Shuffle Remote Reads</span>
+                    <span class="additional-metric-title">Shuffle远程读取</span>
                   </span>
                 </li>
               }}
@@ -240,14 +240,14 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
                 <span data-toggle="tooltip"
                       title={ToolTips.RESULT_SERIALIZATION_TIME} data-placement="right">
                   <input type="checkbox" name={TaskDetailsClassNames.RESULT_SERIALIZATION_TIME}/>
-                  <span class="additional-metric-title">Result Serialization Time</span>
+                  <span class="additional-metric-title">结果序列化时长</span>
                 </span>
               </li>
               <li>
                 <span data-toggle="tooltip"
                       title={ToolTips.GETTING_RESULT_TIME} data-placement="right">
                   <input type="checkbox" name={TaskDetailsClassNames.GETTING_RESULT_TIME}/>
-                  <span class="additional-metric-title">Getting Result Time</span>
+                  <span class="additional-metric-title">结果获取时长</span>
                 </span>
               </li>
               {if (displayPeakExecutionMemory) {
@@ -255,7 +255,7 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
                   <span data-toggle="tooltip"
                         title={ToolTips.PEAK_EXECUTION_MEMORY} data-placement="right">
                     <input type="checkbox" name={TaskDetailsClassNames.PEAK_EXECUTION_MEMORY}/>
-                    <span class="additional-metric-title">Peak Execution Memory</span>
+                    <span class="additional-metric-title">内存峰值</span>
                   </span>
                 </li>
               }}
@@ -362,14 +362,14 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
             <td>
               <span data-toggle="tooltip" title={ToolTips.TASK_DESERIALIZATION_TIME}
                     data-placement="right">
-                Task Deserialization Time
+                任务解序列化时长
               </span>
             </td> +: getFormattedTimeQuantiles(deserializationTimes)
 
           val serviceTimes = validTasks.map { taskUIData: TaskUIData =>
             taskUIData.metrics.get.executorRunTime.toDouble
           }
-          val serviceQuantiles = <td>Duration</td> +: getFormattedTimeQuantiles(serviceTimes)
+          val serviceQuantiles = <td>时长</td> +: getFormattedTimeQuantiles(serviceTimes)
 
           val gcTimes = validTasks.map { taskUIData: TaskUIData =>
             taskUIData.metrics.get.jvmGCTime.toDouble
@@ -377,7 +377,7 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
           val gcQuantiles =
             <td>
               <span data-toggle="tooltip"
-                  title={ToolTips.GC_TIME} data-placement="right">GC Time
+                  title={ToolTips.GC_TIME} data-placement="right">GC 时长
               </span>
             </td> +: getFormattedTimeQuantiles(gcTimes)
 
@@ -388,7 +388,7 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
             <td>
               <span data-toggle="tooltip"
                     title={ToolTips.RESULT_SERIALIZATION_TIME} data-placement="right">
-                Result Serialization Time
+                结果序列化时长
               </span>
             </td> +: getFormattedTimeQuantiles(serializationTimes)
 
@@ -399,7 +399,7 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
             <td>
               <span data-toggle="tooltip"
                   title={ToolTips.GETTING_RESULT_TIME} data-placement="right">
-                Getting Result Time
+                获取结果时长
               </span>
             </td> +:
             getFormattedTimeQuantiles(gettingResultTimes)
@@ -411,7 +411,7 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
             <td>
               <span data-toggle="tooltip"
                     title={ToolTips.PEAK_EXECUTION_MEMORY} data-placement="right">
-                Peak Execution Memory
+                内存峰值
               </span>
             </td> +: getFormattedSizeQuantiles(peakExecutionMemory)
           }
@@ -463,7 +463,7 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
             <td>
               <span data-toggle="tooltip"
                     title={ToolTips.SHUFFLE_READ_BLOCKED_TIME} data-placement="right">
-                Shuffle Read Blocked Time
+                Shuffle 读阻塞时常
               </span>
             </td> +:
             getFormattedTimeQuantiles(shuffleReadBlockedTimes)
@@ -478,7 +478,7 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
             <td>
               <span data-toggle="tooltip"
                     title={ToolTips.SHUFFLE_READ} data-placement="right">
-                Shuffle Read Size / Records
+                Shuffle 读大小/记录
               </span>
             </td> +:
             getFormattedSizeQuantilesWithRecords(shuffleReadTotalSizes, shuffleReadTotalRecords)
@@ -490,7 +490,7 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
             <td>
               <span data-toggle="tooltip"
                     title={ToolTips.SHUFFLE_READ_REMOTE_SIZE} data-placement="right">
-                Shuffle Remote Reads
+                Shuffle 远程读取
               </span>
             </td> +:
             getFormattedSizeQuantiles(shuffleReadRemoteSizes)
@@ -553,8 +553,8 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
             if (stageData.hasBytesSpilled) <tr>{memoryBytesSpilledQuantiles}</tr> else Nil,
             if (stageData.hasBytesSpilled) <tr>{diskBytesSpilledQuantiles}</tr> else Nil)
 
-          val quantileHeaders = Seq("Metric", "Min", "25th percentile",
-            "Median", "75th percentile", "Max")
+          val quantileHeaders = Seq("监控", "最小值", "25百分位",
+            "中值", "75百分位", "最大值")
           // The summary table does not use CSS to stripe rows, which doesn't work with hidden
           // rows (instead, JavaScript in table.js is used to stripe the non-hidden rows).
           Some(UIUtils.listingTable(
@@ -579,11 +579,11 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
           // Only show the tasks in the table
           stageData.taskData.values.toSeq.filter(t => taskIdsInPage.contains(t.taskInfo.taskId)),
           currentTime) ++
-        <h4>Summary Metrics for {numCompleted} Completed Tasks</h4> ++
+        <h4> {numCompleted} 已完成任务的监控摘要</h4> ++
         <div>{summaryTable.getOrElse("No tasks have reported metrics yet.")}</div> ++
-        <h4>Aggregated Metrics by Executor</h4> ++ executorTable.toNodeSeq ++
+        <h4>执行器监控汇总</h4> ++ executorTable.toNodeSeq ++
         maybeAccumulableTable ++
-        <h4 id="tasks-section">Tasks ({totalTasksNumStr})</h4> ++
+        <h4 id="tasks-section">任务 ({totalTasksNumStr})</h4> ++
           taskTableHTML ++ jsForScrollingDownToTaskTable
       UIUtils.headerSparkPage(stageHeader, content, parent, showVisualization = true)
     }
@@ -730,7 +730,7 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
 
     <span class="expand-task-assignment-timeline">
       <span class="expand-task-assignment-timeline-arrow arrow-closed"></span>
-      <a>Event Timeline</a>
+      <a>事件时间表</a>
     </span> ++
     <div id="task-assignment-timeline" class="collapsed">
       {
@@ -747,7 +747,7 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
       <div class="control-panel">
         <div id="task-assignment-timeline-zoom-lock">
           <input type="checkbox"></input>
-          <span>Enable zooming</span>
+          <span>开启 zooming</span>
         </div>
       </div>
       {TIMELINE_LEGEND}
@@ -1031,7 +1031,7 @@ private[ui] class TaskDataSource(
    */
   private def ordering(sortColumn: String, desc: Boolean): Ordering[TaskTableRowData] = {
     val ordering = sortColumn match {
-      case "Index" => new Ordering[TaskTableRowData] {
+      case "序号" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.Int.compare(x.index, y.index)
       }
@@ -1039,55 +1039,55 @@ private[ui] class TaskDataSource(
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.Long.compare(x.taskId, y.taskId)
       }
-      case "Attempt" => new Ordering[TaskTableRowData] {
+      case "尝试" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.Int.compare(x.attempt, y.attempt)
       }
-      case "Status" => new Ordering[TaskTableRowData] {
+      case "状态" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.String.compare(x.status, y.status)
       }
-      case "Locality Level" => new Ordering[TaskTableRowData] {
+      case "本地级别" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.String.compare(x.taskLocality, y.taskLocality)
       }
-      case "Executor ID / Host" => new Ordering[TaskTableRowData] {
+      case "执行器ID/节点" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.String.compare(x.executorIdAndHost, y.executorIdAndHost)
       }
-      case "Launch Time" => new Ordering[TaskTableRowData] {
+      case "启动时间" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.Long.compare(x.launchTime, y.launchTime)
       }
-      case "Duration" => new Ordering[TaskTableRowData] {
+      case "时长" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.Long.compare(x.duration, y.duration)
       }
-      case "Scheduler Delay" => new Ordering[TaskTableRowData] {
+      case "调度延迟" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.Long.compare(x.schedulerDelay, y.schedulerDelay)
       }
-      case "Task Deserialization Time" => new Ordering[TaskTableRowData] {
+      case "任务解序列化时长" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.Long.compare(x.taskDeserializationTime, y.taskDeserializationTime)
       }
-      case "GC Time" => new Ordering[TaskTableRowData] {
+      case "GC时长" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.Long.compare(x.gcTime, y.gcTime)
       }
-      case "Result Serialization Time" => new Ordering[TaskTableRowData] {
+      case "结果序列化时长" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.Long.compare(x.serializationTime, y.serializationTime)
       }
-      case "Getting Result Time" => new Ordering[TaskTableRowData] {
+      case "获取结果时长" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.Long.compare(x.gettingResultTime, y.gettingResultTime)
       }
-      case "Peak Execution Memory" => new Ordering[TaskTableRowData] {
+      case "内存峰值" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.Long.compare(x.peakExecutionMemoryUsed, y.peakExecutionMemoryUsed)
       }
-      case "Accumulators" =>
+      case "累加器" =>
         if (hasAccumulators) {
           new Ordering[TaskTableRowData] {
             override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
@@ -1095,9 +1095,9 @@ private[ui] class TaskDataSource(
           }
         } else {
           throw new IllegalArgumentException(
-            "Cannot sort by Accumulators because of no accumulators")
+            "无法按照该项排序")
         }
-      case "Input Size / Records" =>
+      case "输入大小/记录数" =>
         if (hasInput) {
           new Ordering[TaskTableRowData] {
             override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
@@ -1105,9 +1105,9 @@ private[ui] class TaskDataSource(
           }
         } else {
           throw new IllegalArgumentException(
-            "Cannot sort by Input Size / Records because of no inputs")
+            "无法按照该项排序")
         }
-      case "Output Size / Records" =>
+      case "输出大小/记录数" =>
         if (hasOutput) {
           new Ordering[TaskTableRowData] {
             override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
@@ -1115,10 +1115,10 @@ private[ui] class TaskDataSource(
           }
         } else {
           throw new IllegalArgumentException(
-            "Cannot sort by Output Size / Records because of no outputs")
+            "无法按照该项排序")
         }
       // ShuffleRead
-      case "Shuffle Read Blocked Time" =>
+      case "Shuffle读阻塞时长" =>
         if (hasShuffleRead) {
           new Ordering[TaskTableRowData] {
             override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
@@ -1127,9 +1127,9 @@ private[ui] class TaskDataSource(
           }
         } else {
           throw new IllegalArgumentException(
-            "Cannot sort by Shuffle Read Blocked Time because of no shuffle reads")
+            "无法按照该项排序Shuffle Read Blocked Time because of no shuffle reads")
         }
-      case "Shuffle Read Size / Records" =>
+      case "Shuffle读大小/记录数" =>
         if (hasShuffleRead) {
           new Ordering[TaskTableRowData] {
             override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
@@ -1138,9 +1138,9 @@ private[ui] class TaskDataSource(
           }
         } else {
           throw new IllegalArgumentException(
-            "Cannot sort by Shuffle Read Size / Records because of no shuffle reads")
+            "无法按照该项排序")
         }
-      case "Shuffle Remote Reads" =>
+      case "Shuffle远程读取" =>
         if (hasShuffleRead) {
           new Ordering[TaskTableRowData] {
             override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
@@ -1149,10 +1149,10 @@ private[ui] class TaskDataSource(
           }
         } else {
           throw new IllegalArgumentException(
-            "Cannot sort by Shuffle Remote Reads because of no shuffle reads")
+            "无法按照该项排序")
         }
       // ShuffleWrite
-      case "Write Time" =>
+      case "写时长" =>
         if (hasShuffleWrite) {
           new Ordering[TaskTableRowData] {
             override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
@@ -1161,9 +1161,9 @@ private[ui] class TaskDataSource(
           }
         } else {
           throw new IllegalArgumentException(
-            "Cannot sort by Write Time because of no shuffle writes")
+            "无法按照该项排序")
         }
-      case "Shuffle Write Size / Records" =>
+      case "Shuffle写大小/记录数" =>
         if (hasShuffleWrite) {
           new Ordering[TaskTableRowData] {
             override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
@@ -1172,10 +1172,10 @@ private[ui] class TaskDataSource(
           }
         } else {
           throw new IllegalArgumentException(
-            "Cannot sort by Shuffle Write Size / Records because of no shuffle writes")
+            "无法按照该项排序")
         }
       // BytesSpilled
-      case "Shuffle Spill (Memory)" =>
+      case "Shuffle溢出（内存）" =>
         if (hasBytesSpilled) {
           new Ordering[TaskTableRowData] {
             override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
@@ -1184,9 +1184,9 @@ private[ui] class TaskDataSource(
           }
         } else {
           throw new IllegalArgumentException(
-            "Cannot sort by Shuffle Spill (Memory) because of no spills")
+            "无法按照该项排序")
         }
-      case "Shuffle Spill (Disk)" =>
+      case "Shuffle溢出（磁盘）" =>
         if (hasBytesSpilled) {
           new Ordering[TaskTableRowData] {
             override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
@@ -1195,13 +1195,13 @@ private[ui] class TaskDataSource(
           }
         } else {
           throw new IllegalArgumentException(
-            "Cannot sort by Shuffle Spill (Disk) because of no spills")
+            "无法按照该项排序")
         }
       case "Errors" => new Ordering[TaskTableRowData] {
         override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
           Ordering.String.compare(x.error, y.error)
       }
-      case unknownColumn => throw new IllegalArgumentException(s"Unknown column: $unknownColumn")
+      case unknownColumn => throw new IllegalArgumentException(s"未知列: $unknownColumn")
     }
     if (desc) {
       ordering.reverse
@@ -1271,44 +1271,44 @@ private[ui] class TaskPagedTable(
   def headers: Seq[Node] = {
     val taskHeadersAndCssClasses: Seq[(String, String)] =
       Seq(
-        ("Index", ""), ("ID", ""), ("Attempt", ""), ("Status", ""), ("Locality Level", ""),
-        ("Executor ID / Host", ""), ("Launch Time", ""), ("Duration", ""),
-        ("Scheduler Delay", TaskDetailsClassNames.SCHEDULER_DELAY),
-        ("Task Deserialization Time", TaskDetailsClassNames.TASK_DESERIALIZATION_TIME),
-        ("GC Time", ""),
-        ("Result Serialization Time", TaskDetailsClassNames.RESULT_SERIALIZATION_TIME),
-        ("Getting Result Time", TaskDetailsClassNames.GETTING_RESULT_TIME)) ++
+        ("序号", ""), ("ID", ""), ("尝试", ""), ("状态", ""), ("本地级别", ""),
+        ("执行器 ID / 节点", ""), ("启动时间", ""), ("时长", ""),
+        ("调度延迟", TaskDetailsClassNames.SCHEDULER_DELAY),
+        ("任务解序列化时长", TaskDetailsClassNames.TASK_DESERIALIZATION_TIME),
+        ("GC时长", ""),
+        ("结果序列化时长", TaskDetailsClassNames.RESULT_SERIALIZATION_TIME),
+        ("获取结果时长", TaskDetailsClassNames.GETTING_RESULT_TIME)) ++
         {
           if (displayPeakExecutionMemory) {
-            Seq(("Peak Execution Memory", TaskDetailsClassNames.PEAK_EXECUTION_MEMORY))
+            Seq(("内存峰值", TaskDetailsClassNames.PEAK_EXECUTION_MEMORY))
           } else {
             Nil
           }
         } ++
-        {if (hasAccumulators) Seq(("Accumulators", "")) else Nil} ++
-        {if (hasInput) Seq(("Input Size / Records", "")) else Nil} ++
-        {if (hasOutput) Seq(("Output Size / Records", "")) else Nil} ++
+        {if (hasAccumulators) Seq(("累加器", "")) else Nil} ++
+        {if (hasInput) Seq(("输入大小/记录数", "")) else Nil} ++
+        {if (hasOutput) Seq(("输出大小/记录数", "")) else Nil} ++
         {if (hasShuffleRead) {
-          Seq(("Shuffle Read Blocked Time", TaskDetailsClassNames.SHUFFLE_READ_BLOCKED_TIME),
-            ("Shuffle Read Size / Records", ""),
-            ("Shuffle Remote Reads", TaskDetailsClassNames.SHUFFLE_READ_REMOTE_SIZE))
+          Seq(("Shuffle 读阻塞时长", TaskDetailsClassNames.SHUFFLE_READ_BLOCKED_TIME),
+            ("Shuffle 读大小/记录数", ""),
+            ("Shuffle 远程读取", TaskDetailsClassNames.SHUFFLE_READ_REMOTE_SIZE))
         } else {
           Nil
         }} ++
         {if (hasShuffleWrite) {
-          Seq(("Write Time", ""), ("Shuffle Write Size / Records", ""))
+          Seq(("写时长", ""), ("Shuffle写大小/记录数", ""))
         } else {
           Nil
         }} ++
         {if (hasBytesSpilled) {
-          Seq(("Shuffle Spill (Memory)", ""), ("Shuffle Spill (Disk)", ""))
+          Seq(("Shuffle溢出（内存）", ""), ("Shuffle溢出（磁盘）", ""))
         } else {
           Nil
         }} ++
         Seq(("Errors", ""))
 
     if (!taskHeadersAndCssClasses.map(_._1).contains(sortColumn)) {
-      throw new IllegalArgumentException(s"Unknown column: $sortColumn")
+      throw new IllegalArgumentException(s"未知列: $sortColumn")
     }
 
     val headerRow: Seq[Node] = {

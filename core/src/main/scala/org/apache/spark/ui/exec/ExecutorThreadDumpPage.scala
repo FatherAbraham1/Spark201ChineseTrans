@@ -64,16 +64,16 @@ private[ui] class ExecutorThreadDumpPage(parent: ExecutorsTab) extends WebUIPage
       {
         // scalastyle:off
         <p><a class="expandbutton" onClick="expandAllThreadStackTrace(true)">
-          Expand All
+          展开全部
         </a></p>
         <p><a class="expandbutton hidden" onClick="collapseAllThreadStackTrace(true)">
-          Collapse All
+          折叠全部
         </a></p>
         <div class="form-inline">
         <div class="bs-example" data-example-id="simple-form-inline">
           <div class="form-group">
             <div class="input-group">
-              Search: <input type="text" class="form-control" id="search" oninput="onSearchStringChange()"></input>
+              搜索: <input type="text" class="form-control" id="search" oninput="onSearchStringChange()"></input>
             </div>
           </div>
         </div>
@@ -83,14 +83,14 @@ private[ui] class ExecutorThreadDumpPage(parent: ExecutorsTab) extends WebUIPage
       }
       <table class={UIUtils.TABLE_CLASS_STRIPED + " accordion-group" + " sortable"}>
         <thead>
-          <th onClick="collapseAllThreadStackTrace(false)">Thread ID</th>
-          <th onClick="collapseAllThreadStackTrace(false)">Thread Name</th>
-          <th onClick="collapseAllThreadStackTrace(false)">Thread State</th>
+          <th onClick="collapseAllThreadStackTrace(false)">线程 ID</th>
+          <th onClick="collapseAllThreadStackTrace(false)">线程名称</th>
+          <th onClick="collapseAllThreadStackTrace(false)">线程状态</th>
         </thead>
         <tbody>{dumpRows}</tbody>
       </table>
     </div>
     }.getOrElse(Text("Error fetching thread dump"))
-    UIUtils.headerSparkPage(s"Thread dump for executor $executorId", content, parent)
+    UIUtils.headerSparkPage(s"执行器线程 dump  $executorId", content, parent)
   }
 }

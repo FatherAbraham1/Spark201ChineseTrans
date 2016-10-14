@@ -41,17 +41,17 @@ private[ui] class EnvironmentPage(parent: EnvironmentTab) extends WebUIPage("") 
       classPathHeaders, classPathRow, listener.classpathEntries, fixedWidth = true)
     val content =
       <span>
-        <h4>Runtime Information</h4> {runtimeInformationTable}
-        <h4>Spark Properties</h4> {sparkPropertiesTable}
-        <h4>System Properties</h4> {systemPropertiesTable}
-        <h4>Classpath Entries</h4> {classpathEntriesTable}
+        <h4>运行环境</h4> {runtimeInformationTable}
+        <h4>Spark 属性</h4> {sparkPropertiesTable}
+        <h4>系统属性</h4> {systemPropertiesTable}
+        <h4>类入口</h4> {classpathEntriesTable}
       </span>
 
-    UIUtils.headerSparkPage("Environment", content, parent)
+    UIUtils.headerSparkPage("运行环境", content, parent)
   }
 
-  private def propertyHeader = Seq("Name", "Value")
-  private def classPathHeaders = Seq("Resource", "Source")
+  private def propertyHeader = Seq("名称", "值")
+  private def classPathHeaders = Seq("资源", "源")
   private def jvmRow(kv: (String, String)) = <tr><td>{kv._1}</td><td>{kv._2}</td></tr>
   private def propertyRow(kv: (String, String)) = <tr><td>{kv._1}</td><td>{kv._2}</td></tr>
   private def classPathRow(data: (String, String)) = <tr><td>{data._1}</td><td>{data._2}</td></tr>

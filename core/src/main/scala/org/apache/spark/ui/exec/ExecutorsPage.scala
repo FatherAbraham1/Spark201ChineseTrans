@@ -80,30 +80,30 @@ private[ui] class ExecutorsPage(
     val execTable = {
       <table class={UIUtils.TABLE_CLASS_STRIPED_SORTABLE}>
         <thead>
-          <th class="sorttable_numeric">Executor ID</th>
-          <th>Address</th>
-          <th>Status</th>
-          <th>RDD Blocks</th>
-          <th><span data-toggle="tooltip" title={ToolTips.STORAGE_MEMORY}>Storage Memory</span></th>
-          <th>Disk Used</th>
-          <th>Cores</th>
-          <th>Active Tasks</th>
-          <th>Failed Tasks</th>
-          <th>Complete Tasks</th>
+          <th class="sorttable_numeric">执行器 ID</th>
+          <th>地址</th>
+          <th>状态</th>
+          <th>RDD 块</th>
+          <th><span data-toggle="tooltip" title={ToolTips.STORAGE_MEMORY}>内存</span></th>
+          <th>磁盘</th>
+          <th>核</th>
+          <th>活跃</th>
+          <th>已失败</th>
+          <th>已完成</th>
           <th>Total Tasks</th>
-          <th><span data-toggle="tooltip" title={ToolTips.TASK_TIME}>Task Time (GC Time)</span></th>
-          <th><span data-toggle="tooltip" title={ToolTips.INPUT}>Input</span></th>
-          <th><span data-toggle="tooltip" title={ToolTips.SHUFFLE_READ}>Shuffle Read</span></th>
+          <th><span data-toggle="tooltip" title={ToolTips.TASK_TIME}>时长 (GC 时长)</span></th>
+          <th><span data-toggle="tooltip" title={ToolTips.INPUT}>输入</span></th>
+          <th><span data-toggle="tooltip" title={ToolTips.SHUFFLE_READ}>Shuffle 读</span></th>
           <th>
             <!-- Place the shuffle write tooltip on the left (rather than the default position
               of on top) because the shuffle write column is the last column on the right side and
               the tooltip is wider than the column, so it doesn't fit on top. -->
             <span data-toggle="tooltip" data-placement="left" title={ToolTips.SHUFFLE_WRITE}>
-              Shuffle Write
+              Shuffle 写
             </span>
           </th>
-          {if (logsExist) <th class="sorttable_nosort">Logs</th> else Seq.empty}
-          {if (threadDumpEnabled) <th class="sorttable_nosort">Thread Dump</th> else Seq.empty}
+          {if (logsExist) <th class="sorttable_nosort">日志</th> else Seq.empty}
+          {if (threadDumpEnabled) <th class="sorttable_nosort">线程 Dump</th> else Seq.empty}
         </thead>
         <tbody>
           {execInfoSorted.map(execRow(_, logsExist))}
@@ -114,18 +114,18 @@ private[ui] class ExecutorsPage(
     val content =
       <div class="row">
         <div class="span12">
-          <h4>Summary</h4>
+          <h4>摘要</h4>
           {execSummary(activeExecutorInfo, deadExecutorInfo)}
         </div>
       </div>
       <div class = "row">
         <div class="span12">
-          <h4>Executors</h4>
+          <h4>执行器</h4>
           {execTable}
         </div>
       </div>;
 
-    UIUtils.headerSparkPage("Executors", content, parent)
+    UIUtils.headerSparkPage("执行器", content, parent)
   }
 
   /** Render an HTML row representing an executor */
@@ -135,9 +135,9 @@ private[ui] class ExecutorsPage(
     val diskUsed = info.diskUsed
     val executorStatus =
       if (info.isActive) {
-        "Active"
+        "活跃"
       } else {
-        "Dead"
+        "停止"
       }
 
     <tr>
@@ -240,27 +240,27 @@ private[ui] class ExecutorsPage(
   private def execSummary(activeExecInfo: Seq[ExecutorSummary], deadExecInfo: Seq[ExecutorSummary]):
     Seq[Node] = {
     val totalExecInfo = activeExecInfo ++ deadExecInfo
-    val activeRow = execSummaryRow(activeExecInfo, "Active");
-    val deadRow = execSummaryRow(deadExecInfo, "Dead");
-    val totalRow = execSummaryRow(totalExecInfo, "Total");
+    val activeRow = execSummaryRow(activeExecInfo, "活跃");
+    val deadRow = execSummaryRow(deadExecInfo, "停止");
+    val totalRow = execSummaryRow(totalExecInfo, "全部");
 
     <table class={UIUtils.TABLE_CLASS_STRIPED}>
       <thead>
         <th></th>
-        <th>RDD Blocks</th>
-        <th><span data-toggle="tooltip" title={ToolTips.STORAGE_MEMORY}>Storage Memory</span></th>
-        <th>Disk Used</th>
-        <th>Cores</th>
-        <th>Active Tasks</th>
-        <th>Failed Tasks</th>
-        <th>Complete Tasks</th>
+        <th>RDD 块</th>
+        <th><span data-toggle="tooltip" title={ToolTips.STORAGE_MEMORY}>内存</span></th>
+        <th>磁盘</th>
+        <th>核</th>
+        <th>活跃</th>
+        <th>失败</th>
+        <th>完成</th>
         <th>Total Tasks</th>
-        <th><span data-toggle="tooltip" title={ToolTips.TASK_TIME}>Task Time (GC Time)</span></th>
-        <th><span data-toggle="tooltip" title={ToolTips.INPUT}>Input</span></th>
-        <th><span data-toggle="tooltip" title={ToolTips.SHUFFLE_READ}>Shuffle Read</span></th>
+        <th><span data-toggle="tooltip" title={ToolTips.TASK_TIME}>时长(GC 时长)</span></th>
+        <th><span data-toggle="tooltip" title={ToolTips.INPUT}>输入</span></th>
+        <th><span data-toggle="tooltip" title={ToolTips.SHUFFLE_READ}>Shuffle 读</span></th>
         <th>
           <span data-toggle="tooltip" data-placement="left" title={ToolTips.SHUFFLE_WRITE}>
-            Shuffle Write
+            Shuffle 写
           </span>
         </th>
       </thead>

@@ -321,26 +321,26 @@ private[ui] class JobPage(parent: JobsTab) extends WebUIPage("job") {
         jobId, operationGraphListener.getOperationGraphForJob(jobId))
 
       if (shouldShowActiveStages) {
-        content ++= <h4 id="active">Active Stages ({activeStages.size})</h4> ++
+        content ++= <h4 id="active">活跃阶段 ({activeStages.size})</h4> ++
           activeStagesTable.toNodeSeq
       }
       if (shouldShowPendingStages) {
-        content ++= <h4 id="pending">Pending Stages ({pendingOrSkippedStages.size})</h4> ++
+        content ++= <h4 id="pending">等待阶段 ({pendingOrSkippedStages.size})</h4> ++
           pendingOrSkippedStagesTable.toNodeSeq
       }
       if (shouldShowCompletedStages) {
-        content ++= <h4 id="completed">Completed Stages ({completedStages.size})</h4> ++
+        content ++= <h4 id="completed">已完成阶段 ({completedStages.size})</h4> ++
           completedStagesTable.toNodeSeq
       }
       if (shouldShowSkippedStages) {
-        content ++= <h4 id="skipped">Skipped Stages ({pendingOrSkippedStages.size})</h4> ++
+        content ++= <h4 id="skipped">忽略阶段 ({pendingOrSkippedStages.size})</h4> ++
           pendingOrSkippedStagesTable.toNodeSeq
       }
       if (shouldShowFailedStages) {
-        content ++= <h4 id ="failed">Failed Stages ({failedStages.size})</h4> ++
+        content ++= <h4 id ="failed">已失败阶段 ({failedStages.size})</h4> ++
           failedStagesTable.toNodeSeq
       }
-      UIUtils.headerSparkPage(s"Details for Job $jobId", content, parent, showVisualization = true)
+      UIUtils.headerSparkPage(s"作业详情 $jobId", content, parent, showVisualization = true)
     }
   }
 }

@@ -34,7 +34,7 @@ private[ui] class PoolPage(parent: StagesTab) extends WebUIPage("pool") {
       val poolName = Option(request.getParameter("poolname")).map { poolname =>
         UIUtils.decodeURLParameter(poolname)
       }.getOrElse {
-        throw new IllegalArgumentException(s"Missing poolname parameter")
+        throw new IllegalArgumentException(s"缺失调度池名称")
       }
 
       val poolToActiveStages = listener.poolToActiveStages
@@ -48,7 +48,7 @@ private[ui] class PoolPage(parent: StagesTab) extends WebUIPage("pool") {
 
       // For now, pool information is only accessible in live UIs
       val pools = sc.map(_.getPoolForName(poolName).getOrElse {
-        throw new IllegalArgumentException(s"Unknown poolname: $poolName")
+        throw new IllegalArgumentException(s"未找到调度池: $poolName")
       }).toSeq
       val poolTable = new PoolTable(pools, parent)
 
@@ -56,7 +56,7 @@ private[ui] class PoolPage(parent: StagesTab) extends WebUIPage("pool") {
         <h4>Summary </h4> ++ poolTable.toNodeSeq ++
         <h4>{activeStages.size} Active Stages</h4> ++ activeStagesTable.toNodeSeq
 
-      UIUtils.headerSparkPage("Fair Scheduler Pool: " + poolName, content, parent)
+      UIUtils.headerSparkPage("平衡调度池: " + poolName, content, parent)
     }
   }
 }

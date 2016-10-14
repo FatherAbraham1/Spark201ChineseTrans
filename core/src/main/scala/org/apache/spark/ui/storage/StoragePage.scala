@@ -32,7 +32,7 @@ private[ui] class StoragePage(parent: StorageTab) extends WebUIPage("") {
   def render(request: HttpServletRequest): Seq[Node] = {
     val content = rddTable(listener.rddInfoList) ++
       receiverBlockTables(listener.allExecutorStreamBlockStatus.sortBy(_.executorId))
-    UIUtils.headerSparkPage("Storage", content, parent)
+    UIUtils.headerSparkPage("存储", content, parent)
   }
 
   private[storage] def rddTable(rdds: Seq[RDDInfo]): Seq[Node] = {
@@ -49,12 +49,12 @@ private[ui] class StoragePage(parent: StorageTab) extends WebUIPage("") {
 
   /** Header fields for the RDD table */
   private val rddHeader = Seq(
-    "RDD Name",
-    "Storage Level",
-    "Cached Partitions",
-    "Fraction Cached",
-    "Size in Memory",
-    "Size on Disk")
+    "RDD 名称",
+    "存储级别",
+    "缓存 Partitions",
+    "缓存 Fraction",
+    "所占内存",
+    "所占磁盘")
 
   /** Render an HTML row representing an RDD */
   private def rddRow(rdd: RDDInfo): Seq[Node] = {
@@ -99,10 +99,10 @@ private[ui] class StoragePage(parent: StorageTab) extends WebUIPage("") {
   }
 
   private val executorMetricsTableHeader = Seq(
-    "Executor ID",
-    "Address",
-    "Total Size in Memory",
-    "Total Size on Disk",
+    "执行器 ID",
+    "地址",
+    "所占内存",
+    "所占磁盘",
     "Stream Blocks")
 
   private def executorMetricsTableRow(status: ExecutorStreamBlockStatus): Seq[Node] = {
@@ -143,10 +143,10 @@ private[ui] class StoragePage(parent: StorageTab) extends WebUIPage("") {
 
   private val streamBlockTableHeader = Seq(
     "Block ID",
-    "Replication Level",
-    "Location",
-    "Storage Level",
-    "Size")
+    "复制级别",
+    "位置",
+    "存储级别",
+    "大小")
 
   /** Render a stream block */
   private def streamBlockTableRow(block: (BlockId, Seq[BlockUIData])): Seq[Node] = {
@@ -184,13 +184,13 @@ private[ui] class StoragePage(parent: StorageTab) extends WebUIPage("") {
   private[storage] def streamBlockStorageLevelDescriptionAndSize(
       block: BlockUIData): (String, Long) = {
     if (block.storageLevel.useDisk) {
-      ("Disk", block.diskSize)
+      ("磁盘", block.diskSize)
     } else if (block.storageLevel.useMemory && block.storageLevel.deserialized) {
-      ("Memory", block.memSize)
+      ("内存", block.memSize)
     } else if (block.storageLevel.useMemory && !block.storageLevel.deserialized) {
-      ("Memory Serialized", block.memSize)
+      ("内存序列化", block.memSize)
     } else {
-      throw new IllegalStateException(s"Invalid Storage Level: ${block.storageLevel}")
+      throw new IllegalStateException(s"存储级别异常: ${block.storageLevel}")
     }
   }
 

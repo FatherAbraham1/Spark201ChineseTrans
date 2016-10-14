@@ -214,12 +214,12 @@ private[ui] class AllJobsPage(parent: JobsTab) extends WebUIPage("") {
     val someJobHasJobGroup = jobs.exists(_.jobGroup.isDefined)
 
     val columns: Seq[Node] = {
-      <th>{if (someJobHasJobGroup) "Job Id (Job Group)" else "Job Id"}</th>
-      <th>Description</th>
-      <th>Submitted</th>
-      <th>Duration</th>
-      <th class="sorttable_nosort">Stages: Succeeded/Total</th>
-      <th class="sorttable_nosort">Tasks (for all stages): Succeeded/Total</th>
+      <th>{if (someJobHasJobGroup) "作业 Id (作业 Group)" else "作业 Id"}</th>
+      <th>描述</th>
+      <th>提交时间</th>
+      <th>时长</th>
+      <th class="sorttable_nosort">阶段数：已完成/全部 </th>
+      <th class="sorttable_nosort">任务数 (全部阶段): 已完成/全部</th>
     }
 
     def makeRow(job: JobUIData): Seq[Node] = {
@@ -300,11 +300,11 @@ private[ui] class AllJobsPage(parent: JobsTab) extends WebUIPage("") {
         <div>
           <ul class="unstyled">
             <li>
-              <strong>User:</strong>
+              <strong>用户:</strong>
               {parent.getSparkUser}
             </li>
             <li>
-              <strong>Total Uptime:</strong>
+              <strong>已运行时间:</strong>
               {
                 if (endTime < 0 && parent.sc.isDefined) {
                   UIUtils.formatDuration(System.currentTimeMillis() - startTime)
@@ -314,13 +314,13 @@ private[ui] class AllJobsPage(parent: JobsTab) extends WebUIPage("") {
               }
             </li>
             <li>
-              <strong>Scheduling Mode: </strong>
+              <strong>调度方式: </strong>
               {listener.schedulingMode.map(_.toString).getOrElse("Unknown")}
             </li>
             {
               if (shouldShowActiveJobs) {
                 <li>
-                  <a href="#active"><strong>Active Jobs:</strong></a>
+                  <a href="#active"><strong>运行中作业:</strong></a>
                   {activeJobs.size}
                 </li>
               }
@@ -328,7 +328,7 @@ private[ui] class AllJobsPage(parent: JobsTab) extends WebUIPage("") {
             {
               if (shouldShowCompletedJobs) {
                 <li id="completed-summary">
-                  <a href="#completed"><strong>Completed Jobs:</strong></a>
+                  <a href="#completed"><strong>已完成作业:</strong></a>
                   {completedJobNumStr}
                 </li>
               }
@@ -336,7 +336,7 @@ private[ui] class AllJobsPage(parent: JobsTab) extends WebUIPage("") {
             {
               if (shouldShowFailedJobs) {
                 <li>
-                  <a href="#failed"><strong>Failed Jobs:</strong></a>
+                  <a href="#failed"><strong>已失败作业:</strong></a>
                   {listener.numFailedJobs}
                 </li>
               }
@@ -350,22 +350,22 @@ private[ui] class AllJobsPage(parent: JobsTab) extends WebUIPage("") {
           executorListener.executorIdToData, startTime)
 
       if (shouldShowActiveJobs) {
-        content ++= <h4 id="active">Active Jobs ({activeJobs.size})</h4> ++
+        content ++= <h4 id="active">运行中作业 ({activeJobs.size})</h4> ++
           activeJobsTable
       }
       if (shouldShowCompletedJobs) {
-        content ++= <h4 id="completed">Completed Jobs ({completedJobNumStr})</h4> ++
+        content ++= <h4 id="completed">已完成作业 ({completedJobNumStr})</h4> ++
           completedJobsTable
       }
       if (shouldShowFailedJobs) {
-        content ++= <h4 id ="failed">Failed Jobs ({failedJobs.size})</h4> ++
+        content ++= <h4 id ="failed">已失败作业 ({failedJobs.size})</h4> ++
           failedJobsTable
       }
 
       val helpText = """A job is triggered by an action, like count() or saveAsTextFile().""" +
         " Click on a job to see information about the stages of tasks inside it."
 
-      UIUtils.headerSparkPage("Spark Jobs", content, parent, helpText = Some(helpText))
+      UIUtils.headerSparkPage("Spark 作业", content, parent, helpText = Some(helpText))
     }
   }
 }

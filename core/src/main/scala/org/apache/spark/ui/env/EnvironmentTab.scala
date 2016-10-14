@@ -21,7 +21,7 @@ import org.apache.spark.annotation.DeveloperApi
 import org.apache.spark.scheduler._
 import org.apache.spark.ui._
 
-private[ui] class EnvironmentTab(parent: SparkUI) extends SparkUITab(parent, "environment") {
+private[ui] class EnvironmentTab(parent: SparkUI) extends SparkUITab(parent, "运行环境") {
   val listener = parent.environmentListener
   attachPage(new EnvironmentPage(this))
 }
