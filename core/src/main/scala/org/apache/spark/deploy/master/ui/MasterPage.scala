@@ -71,20 +71,20 @@ private[ui] class MasterPage(parent: MasterWebUI) extends WebUIPage("") {
   def render(request: HttpServletRequest): Seq[Node] = {
     val state = getMasterState
 
-    val workerHeaders = Seq("Worker Id", "Address", "State", "Cores", "Memory")
+    val workerHeaders = Seq("Worker Id", "地址", "状态", "核", "内存")
     val workers = state.workers.sortBy(_.id)
     val aliveWorkers = state.workers.filter(_.state == WorkerState.ALIVE)
     val workerTable = UIUtils.listingTable(workerHeaders, workerRow, workers)
 
-    val appHeaders = Seq("Application ID", "Name", "Cores", "Memory per Node", "Submitted Time",
-      "User", "State", "Duration")
+    val appHeaders = Seq("应用 ID", "名称", "核", "单节点内存", "提交时间",
+      "用户", "状态", "间隔")
     val activeApps = state.activeApps.sortBy(_.startTime).reverse
     val activeAppsTable = UIUtils.listingTable(appHeaders, appRow, activeApps)
     val completedApps = state.completedApps.sortBy(_.endTime).reverse
     val completedAppsTable = UIUtils.listingTable(appHeaders, appRow, completedApps)
 
-    val driverHeaders = Seq("Submission ID", "Submitted Time", "Worker", "State", "Cores",
-      "Memory", "Main Class")
+    val driverHeaders = Seq("任务 ID", "提交时间", "Worker", "状态", "核",
+      "内存", "Main Class")
     val activeDrivers = state.activeDrivers.sortBy(_.startTime).reverse
     val activeDriversTable = UIUtils.listingTable(driverHeaders, driverRow, activeDrivers)
     val completedDrivers = state.completedDrivers.sortBy(_.startTime).reverse
@@ -107,19 +107,19 @@ private[ui] class MasterPage(parent: MasterWebUI) extends WebUIPage("") {
                   </li>
                 }.getOrElse { Seq.empty }
               }
-              <li><strong>Alive Workers:</strong> {aliveWorkers.length}</li>
-              <li><strong>Cores in use:</strong> {aliveWorkers.map(_.cores).sum} Total,
+              <li><strong>存活 Workers:</strong> {aliveWorkers.length}</li>
+              <li><strong>使用核数:</strong> {aliveWorkers.map(_.cores).sum} Total,
                 {aliveWorkers.map(_.coresUsed).sum} Used</li>
-              <li><strong>Memory in use:</strong>
+              <li><strong>使用内存:</strong>
                 {Utils.megabytesToString(aliveWorkers.map(_.memory).sum)} Total,
                 {Utils.megabytesToString(aliveWorkers.map(_.memoryUsed).sum)} Used</li>
-              <li><strong>Applications:</strong>
+              <li><strong>应用:</strong>
                 {state.activeApps.length} <a href="#running-app">Running</a>,
                 {state.completedApps.length} <a href="#completed-app">Completed</a> </li>
               <li><strong>Drivers:</strong>
-                {state.activeDrivers.length} Running,
-                {state.completedDrivers.length} Completed </li>
-              <li><strong>Status:</strong> {state.status}</li>
+                {state.activeDrivers.length} 正在运行,
+                {state.completedDrivers.length} 已完成 </li>
+              <li><strong>状态:</strong> {state.status}</li>
             </ul>
           </div>
         </div>
@@ -133,7 +133,7 @@ private[ui] class MasterPage(parent: MasterWebUI) extends WebUIPage("") {
 
         <div class="row-fluid">
           <div class="span12">
-            <h4 id="running-app"> Running Applications </h4>
+            <h4 id="running-app"> 运行中应用 </h4>
             {activeAppsTable}
           </div>
         </div>
@@ -142,7 +142,7 @@ private[ui] class MasterPage(parent: MasterWebUI) extends WebUIPage("") {
           {if (hasDrivers) {
              <div class="row-fluid">
                <div class="span12">
-                 <h4> Running Drivers </h4>
+                 <h4> 运行中 Drivers </h4>
                  {activeDriversTable}
                </div>
              </div>
@@ -152,7 +152,7 @@ private[ui] class MasterPage(parent: MasterWebUI) extends WebUIPage("") {
 
         <div class="row-fluid">
           <div class="span12">
-            <h4 id="completed-app"> Completed Applications </h4>
+            <h4 id="completed-app"> 已完成应用 </h4>
             {completedAppsTable}
           </div>
         </div>
@@ -162,7 +162,7 @@ private[ui] class MasterPage(parent: MasterWebUI) extends WebUIPage("") {
             if (hasDrivers) {
               <div class="row-fluid">
                 <div class="span12">
-                  <h4> Completed Drivers </h4>
+                  <h4> 已完成 Drivers </h4>
                   {completedDriversTable}
                 </div>
               </div>

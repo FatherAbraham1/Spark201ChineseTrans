@@ -57,9 +57,9 @@ private[ui] class ApplicationPage(parent: MasterWebUI) extends WebUIPage("app") 
         <div class="span12">
           <ul class="unstyled">
             <li><strong>ID:</strong> {app.id}</li>
-            <li><strong>Name:</strong> {app.desc.name}</li>
-            <li><strong>User:</strong> {app.desc.user}</li>
-            <li><strong>Cores:</strong>
+            <li><strong>名称:</strong> {app.desc.name}</li>
+            <li><strong>用户:</strong> {app.desc.user}</li>
+            <li><strong>核:</strong>
             {
               if (app.desc.maxCores.isEmpty) {
                 "Unlimited (%s granted)".format(app.coresGranted)
@@ -80,14 +80,14 @@ private[ui] class ApplicationPage(parent: MasterWebUI) extends WebUIPage("app") 
               </span>
             </li>
             <li>
-              <strong>Executor Memory:</strong>
+              <strong>执行器内存:</strong>
               {Utils.megabytesToString(app.desc.memoryPerExecutorMB)}
             </li>
-            <li><strong>Submit Date:</strong> {app.submitDate}</li>
-            <li><strong>State:</strong> {app.state}</li>
+            <li><strong>提交时间:</strong> {app.submitDate}</li>
+            <li><strong>状态:</strong> {app.state}</li>
             {
               if (!app.isFinished) {
-                <li><strong><a href={app.desc.appUiUrl}>Application Detail UI</a></strong></li>
+                <li><strong><a href={app.desc.appUiUrl}>应用详情</a></strong></li>
               }
             }
           </ul>
@@ -96,11 +96,11 @@ private[ui] class ApplicationPage(parent: MasterWebUI) extends WebUIPage("app") 
 
       <div class="row-fluid"> <!-- Executors -->
         <div class="span12">
-          <h4> Executor Summary </h4>
+          <h4> 执行器摘要 </h4>
           {executorsTable}
           {
             if (removedExecutors.nonEmpty) {
-              <h4> Removed Executors </h4> ++
+              <h4> 已删除执行器 </h4> ++
               removedExecutorsTable
             }
           }

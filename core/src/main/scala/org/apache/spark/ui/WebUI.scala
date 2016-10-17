@@ -164,9 +164,10 @@ private[spark] abstract class WebUI(
  * A tab that represents a collection of pages.
  * The prefix is appended to the parent address to form a full path, and must not contain slashes.
  */
-private[spark] abstract class WebUITab(parent: WebUI, val prefix: String) {
+private[spark] abstract class WebUITab(parent: WebUI, val prefix: String, val trueTabName: String) {
   val pages = ArrayBuffer[WebUIPage]()
-  val name = prefix.capitalize
+  def this(pt: WebUI, pf: String) = this(pt, pf, null)
+  val name = if(trueTabName != null) trueTabName else prefix.capitalize
 
   /** Attach a page to this tab. This prepends the page's prefix with the tab's own prefix. */
   def attachPage(page: WebUIPage) {
