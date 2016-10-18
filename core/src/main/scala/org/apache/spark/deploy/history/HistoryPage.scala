@@ -62,15 +62,15 @@ private[history] class HistoryPage(parent: HistoryServer) extends WebUIPage("") 
             <a href={makePageLink(!requestedIncomplete)}>
               {
               if (requestedIncomplete) {
-                "Back to completed applications"
+                "返回已完成应用"
               } else {
-                "Show incomplete applications"
+                "显示未完成应用"
               }
               }
             </a>
           </div>
       </div>
-    UIUtils.basicSparkPage(content, "History Server", true)
+    UIUtils.basicSparkPage(content, "历史服务器", true)
   }
 
   private def makePageLink(showIncomplete: Boolean): String = {

@@ -36,21 +36,21 @@ private[ui] class StageTableBase(
     killEnabled: Boolean) {
 
   protected def columns: Seq[Node] = {
-    <th>Stage Id</th> ++
-    {if (isFairScheduler) {<th>Pool Name</th>} else Seq.empty} ++
-    <th>Description</th>
-    <th>Submitted</th>
-    <th>Duration</th>
-    <th>Tasks: Succeeded/Total</th>
-    <th><span data-toggle="tooltip" title={ToolTips.INPUT}>Input</span></th>
-    <th><span data-toggle="tooltip" title={ToolTips.OUTPUT}>Output</span></th>
-    <th><span data-toggle="tooltip" title={ToolTips.SHUFFLE_READ}>Shuffle Read</span></th>
+    <th>阶段 Id</th> ++
+    {if (isFairScheduler) {<th>Pool 名称</th>} else Seq.empty} ++
+    <th>描述</th>
+    <th>提交时间</th>
+    <th>持续</th>
+    <th>任务数：已完成/总数</th>
+    <th><span data-toggle="tooltip" title={ToolTips.INPUT}>输入</span></th>
+    <th><span data-toggle="tooltip" title={ToolTips.OUTPUT}>输出</span></th>
+    <th><span data-toggle="tooltip" title={ToolTips.SHUFFLE_READ}>Shuffle 读</span></th>
     <th>
       <!-- Place the shuffle write tooltip on the left (rather than the default position
         of on top) because the shuffle write column is the last column on the right side and
         the tooltip is wider than the column, so it doesn't fit on top. -->
       <span data-toggle="tooltip" data-placement="left" title={ToolTips.SHUFFLE_WRITE}>
-        Shuffle Write
+        Shuffle 写
       </span>
     </th>
   }

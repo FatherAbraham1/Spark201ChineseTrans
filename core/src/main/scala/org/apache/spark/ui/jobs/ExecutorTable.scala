@@ -52,37 +52,37 @@ private[ui] class ExecutorTable(stageId: Int, stageAttemptId: Int, parent: Stage
 
     <table class={UIUtils.TABLE_CLASS_STRIPED_SORTABLE}>
       <thead>
-        <th id="executorid">Executor ID</th>
-        <th>Address</th>
-        <th>Task Time</th>
-        <th>Total Tasks</th>
-        <th>Failed Tasks</th>
-        <th>Succeeded Tasks</th>
+        <th id="executorid">执行器 ID</th>
+        <th>地址</th>
+        <th>任务时间</th>
+        <th>总任务数</th>
+        <th>已失败任务数</th>
+        <th>已成功任务数</th>
         {if (hasInput) {
           <th>
-            <span data-toggle="tooltip" title={ToolTips.INPUT}>Input Size / Records</span>
+            <span data-toggle="tooltip" title={ToolTips.INPUT}>输入大小/记录数</span>
           </th>
         }}
         {if (hasOutput) {
           <th>
-            <span data-toggle="tooltip" title={ToolTips.OUTPUT}>Output Size / Records</span>
+            <span data-toggle="tooltip" title={ToolTips.OUTPUT}>输出大小/记录数</span>
           </th>
         }}
         {if (hasShuffleRead) {
           <th>
             <span data-toggle="tooltip" title={ToolTips.SHUFFLE_READ}>
-            Shuffle Read Size / Records</span>
+            Shuffle读大小/记录数</span>
           </th>
         }}
         {if (hasShuffleWrite) {
           <th>
             <span data-toggle="tooltip" title={ToolTips.SHUFFLE_WRITE}>
-            Shuffle Write Size / Records</span>
+            Shuffle写大小/记录数</span>
           </th>
         }}
         {if (hasBytesSpilled) {
-          <th>Shuffle Spill (Memory)</th>
-          <th>Shuffle Spill (Disk)</th>
+          <th>Shuffle溢出(内存)</th>
+          <th>Shuffle溢出(磁盘)</th>
         }}
       </thead>
       <tbody>

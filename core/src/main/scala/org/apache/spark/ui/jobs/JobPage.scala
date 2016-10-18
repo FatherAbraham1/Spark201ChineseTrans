@@ -167,7 +167,7 @@ private[ui] class JobPage(parent: JobsTab) extends WebUIPage("job") {
     <span class="expand-job-timeline">
       <span class="expand-job-timeline-arrow arrow-closed"></span>
       <a data-toggle="tooltip" title={ToolTips.STAGE_TIMELINE} data-placement="right">
-        Event Timeline
+        事件时间线
       </a>
     </span> ++
     <div id="job-timeline" class="collapsed">
@@ -254,13 +254,13 @@ private[ui] class JobPage(parent: JobsTab) extends WebUIPage("job") {
         <div>
           <ul class="unstyled">
             <li>
-              <Strong>Status:</Strong>
+              <Strong>状态:</Strong>
               {jobData.status}
             </li>
             {
               if (jobData.jobGroup.isDefined) {
                 <li>
-                  <strong>Job Group:</strong>
+                  <strong>作业组:</strong>
                   {jobData.jobGroup.get}
                 </li>
               }
@@ -268,7 +268,7 @@ private[ui] class JobPage(parent: JobsTab) extends WebUIPage("job") {
             {
               if (shouldShowActiveStages) {
                 <li>
-                  <a href="#active"><strong>Active Stages:</strong></a>
+                  <a href="#active"><strong>活跃阶段:</strong></a>
                   {activeStages.size}
                 </li>
               }
@@ -277,7 +277,7 @@ private[ui] class JobPage(parent: JobsTab) extends WebUIPage("job") {
               if (shouldShowPendingStages) {
                 <li>
                   <a href="#pending">
-                    <strong>Pending Stages:</strong>
+                    <strong>等待阶段:</strong>
                   </a>{pendingOrSkippedStages.size}
                 </li>
               }
@@ -285,7 +285,7 @@ private[ui] class JobPage(parent: JobsTab) extends WebUIPage("job") {
             {
               if (shouldShowCompletedStages) {
                 <li>
-                  <a href="#completed"><strong>Completed Stages:</strong></a>
+                  <a href="#completed"><strong>已完成阶段:</strong></a>
                   {completedStages.size}
                 </li>
               }
@@ -293,7 +293,7 @@ private[ui] class JobPage(parent: JobsTab) extends WebUIPage("job") {
             {
               if (shouldShowSkippedStages) {
               <li>
-                <a href="#skipped"><strong>Skipped Stages:</strong></a>
+                <a href="#skipped"><strong>已忽略阶段:</strong></a>
                 {pendingOrSkippedStages.size}
               </li>
             }
@@ -301,7 +301,7 @@ private[ui] class JobPage(parent: JobsTab) extends WebUIPage("job") {
             {
               if (shouldShowFailedStages) {
                 <li>
-                  <a href="#failed"><strong>Failed Stages:</strong></a>
+                  <a href="#failed"><strong>已失败阶段:</strong></a>
                   {failedStages.size}
                 </li>
               }

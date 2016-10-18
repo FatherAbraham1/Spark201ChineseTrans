@@ -193,7 +193,7 @@ private[ui] class AllJobsPage(parent: JobsTab) extends WebUIPage("") {
     <span class="expand-application-timeline">
       <span class="expand-application-timeline-arrow arrow-closed"></span>
       <a data-toggle="tooltip" title={ToolTips.JOB_TIMELINE} data-placement="right">
-        Event Timeline
+        事件时间线
       </a>
     </span> ++
     <div id="application-timeline" class="collapsed">
