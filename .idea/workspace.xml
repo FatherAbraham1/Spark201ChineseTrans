@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e03d63ed-5b4c-47c9-a470-4564eef51e53" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/scala/org/apache/spark/deploy/history/HistoryPage.scala" afterPath="$PROJECT_DIR$/core/src/main/scala/org/apache/spark/deploy/history/HistoryPage.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/scala/org/apache/spark/ui/UIUtils.scala" afterPath="$PROJECT_DIR$/core/src/main/scala/org/apache/spark/ui/UIUtils.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/scala/org/apache/spark/ui/jobs/AllJobsPage.scala" afterPath="$PROJECT_DIR$/core/src/main/scala/org/apache/spark/ui/jobs/AllJobsPage.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/scala/org/apache/spark/ui/jobs/ExecutorTable.scala" afterPath="$PROJECT_DIR$/core/src/main/scala/org/apache/spark/ui/jobs/ExecutorTable.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/scala/org/apache/spark/ui/jobs/JobPage.scala" afterPath="$PROJECT_DIR$/core/src/main/scala/org/apache/spark/ui/jobs/JobPage.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/src/main/scala/org/apache/spark/ui/jobs/StageTable.scala" afterPath="$PROJECT_DIR$/core/src/main/scala/org/apache/spark/ui/jobs/StageTable.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Spark201ChineseTrans.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1514,15 +1509,15 @@
       <option name="presentableId" value="Default" />
       <updated>1476428294225</updated>
       <workItem from="1476428298525" duration="9567000" />
-      <workItem from="1476682653013" duration="20187000" />
+      <workItem from="1476682653013" duration="20719000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29754000" />
+    <option name="totallyTimeSpent" value="30286000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1913" y="2" width="1932" height="1045" extended-state="0" />
+    <frame x="1913" y="2" width="1932" height="1045" extended-state="1" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1815,7 +1810,7 @@
         <state relative-caret-position="119">
           <caret line="22" column="53" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
           <folding>
-            <element signature="e#836#884#0" expanded="true" />
+            <element signature="e#836#884#0" expanded="false" />
           </folding>
         </state>
       </provider>
