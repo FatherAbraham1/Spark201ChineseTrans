@@ -102,7 +102,7 @@ private[ui] class StagePage(parent: StagesTab) extends WebUIPage("stage") {
       val taskPage = Option(parameterTaskPage).map(_.toInt).getOrElse(1)
       val taskSortColumn = Option(parameterTaskSortColumn).map { sortColumn =>
         UIUtils.decodeURLParameter(sortColumn)
-      }.getOrElse("Index")
+      }.getOrElse("序号")
       val taskSortDesc = Option(parameterTaskSortDesc).map(_.toBoolean).getOrElse(false)
       val taskPageSize = Option(parameterTaskPageSize).map(_.toInt).getOrElse(100)
       val taskPrevPageSize = Option(parameterTaskPrevPageSize).map(_.toInt).getOrElse(taskPageSize)
@@ -1118,7 +1118,7 @@ private[ui] class TaskDataSource(
             "无法按照该项排序")
         }
       // ShuffleRead
-      case "Shuffle读阻塞时长" =>
+      case "Shuffle 读阻塞时长" =>
         if (hasShuffleRead) {
           new Ordering[TaskTableRowData] {
             override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
@@ -1129,7 +1129,7 @@ private[ui] class TaskDataSource(
           throw new IllegalArgumentException(
             "无法按照该项排序Shuffle Read Blocked Time because of no shuffle reads")
         }
-      case "Shuffle读大小/记录数" =>
+      case "Shuffle 读大小/记录数" =>
         if (hasShuffleRead) {
           new Ordering[TaskTableRowData] {
             override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
@@ -1140,7 +1140,7 @@ private[ui] class TaskDataSource(
           throw new IllegalArgumentException(
             "无法按照该项排序")
         }
-      case "Shuffle远程读取" =>
+      case "Shuffle 远程读取" =>
         if (hasShuffleRead) {
           new Ordering[TaskTableRowData] {
             override def compare(x: TaskTableRowData, y: TaskTableRowData): Int =
@@ -1272,7 +1272,7 @@ private[ui] class TaskPagedTable(
     val taskHeadersAndCssClasses: Seq[(String, String)] =
       Seq(
         ("序号", ""), ("ID", ""), ("尝试", ""), ("状态", ""), ("本地级别", ""),
-        ("执行器 ID / 节点", ""), ("启动时间", ""), ("时长", ""),
+        ("执行器ID/节点", ""), ("启动时间", ""), ("时长", ""),
         ("调度延迟", TaskDetailsClassNames.SCHEDULER_DELAY),
         ("任务解序列化时长", TaskDetailsClassNames.TASK_DESERIALIZATION_TIME),
         ("GC时长", ""),
