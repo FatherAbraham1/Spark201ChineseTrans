@@ -47,7 +47,7 @@ private[history] class HistoryPage(parent: HistoryServer) extends WebUIPage("") 
               <script src={UIUtils.prependBaseUri("/static/historypage.js")}> </script> ++
               <script>setAppLimit({parent.maxApplications})</script>
             } else if (requestedIncomplete) {
-              <h4>No incomplete applications found!</h4>
+              <h4>没有未完成的应用！</h4>
             } else {
               <h4>No completed applications found!</h4> ++
                 <p>Did you specify the correct logging directory?

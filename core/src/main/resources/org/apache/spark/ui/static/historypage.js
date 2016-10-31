@@ -102,7 +102,7 @@ jQuery.extend( jQuery.fn.dataTableExt.oSort, {
 
 $(document).ajaxStop($.unblockUI);
 $(document).ajaxStart(function(){
-    $.blockUI({ message: '<h3>Loading history summary...</h3>'});
+    $.blockUI({ message: '<h3>加载历史信息中……</h3>'});
 });
 
 $(document).ready(function() {
